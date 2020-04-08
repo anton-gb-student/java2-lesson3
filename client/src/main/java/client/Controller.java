@@ -50,11 +50,11 @@ public class Controller implements Initializable {
 
     private boolean authenticated;
     private String nickname;
-    private String login;
+    private String login; // Добавил переменную для названия файла хистори
 
     private Stage regStage;
 
-    HistoryHandler historyHandler;
+    HistoryHandler historyHandler; // Еще 2 переменные для работы обработчика истории
     File file;
 
     public void setAuthenticated(boolean authenticated) {
@@ -110,9 +110,9 @@ public class Controller implements Initializable {
                         if (str.startsWith("/authok ")) {
 //                            "/authok nick1 login1"
                             nickname = str.split(" ")[1];
-                            login = str.split(" ")[2];
+                            login = str.split(" ")[2]; // Добавил возврат логина с сервера для имени файла
                             setAuthenticated(true);
-                            historyHandler = new HistoryHandler(login);
+                            historyHandler = new HistoryHandler(login); // Здесь создается файл
                             file = historyHandler.getFile();
                             break;
                         }
@@ -121,7 +121,7 @@ public class Controller implements Initializable {
                     }
 
                     setTitle(CHAT_TITLE_EMPTY + " : " + nickname);
-                    ArrayList<String> strings = historyHandler.stringsInFile(file);
+                    ArrayList<String> strings = historyHandler.stringsInFile(file); // Выводятся последние строки из файла
                     for (String s : strings) {
                         textArea.appendText(s + "\n");
                     }
@@ -150,7 +150,7 @@ public class Controller implements Initializable {
 
                         } else {
                             textArea.appendText(str + "\n");
-                            historyHandler.writeToHistory(str);
+                            historyHandler.writeToHistory(str); // Записывает строку в хистори
                         }
                     }
                 } catch (EOFException e) {

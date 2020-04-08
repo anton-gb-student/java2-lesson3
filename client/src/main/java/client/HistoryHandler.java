@@ -3,13 +3,13 @@ package client;
 import java.io.*;
 import java.util.ArrayList;
 
-public class HistoryHandler {
+public class HistoryHandler { // Класс для обработки хистори-файлов
     String login;
     private File file;
     private BufferedReader reader;
     private PrintWriter writer;
 
-    public HistoryHandler(String login) {
+    public HistoryHandler(String login) { // Конструктор, проверяет, есть ли файл с таким именем, если нет - создает
         this.login = login;
         String path = "history_" + login + ".txt";
         file = new File(path);
@@ -36,8 +36,8 @@ public class HistoryHandler {
         }
     }
 
-    public ArrayList <String> stringsInFile (File file) {
-        ArrayList<String> strings = new ArrayList<>();
+    public ArrayList <String> stringsInFile (File file) { // Метод для вывода последних строк из хистори.
+        ArrayList<String> strings;    // У меня очень медленно работает, поэтому сократил число строк до 20
         strings = new ArrayList<>();
         String str;
         try {
@@ -49,9 +49,7 @@ public class HistoryHandler {
             if (head <= 0) {
                 return strings;
             } else {
-                for (int i = head; i >= 0; i--) {
-                    strings.remove(i);
-                }
+                strings.subList(0, head + 1).clear();
                 strings.trimToSize();
             }
         } catch (IOException e) {

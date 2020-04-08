@@ -58,7 +58,7 @@ public class ClientHandler {
 
                             if (newNick != null) {
                                 if (!server.isLoginAuthorized(login)) {
-                                    sendMsg("/authok " + newNick + " " + login);
+                                    sendMsg("/authok " + newNick + " " + login); // Возврат логина клиенту добавил
                                     nick = newNick;
                                     server.subscribe(this);
                                     System.out.println("Клиент " + nick + " прошел аутентификацию");
